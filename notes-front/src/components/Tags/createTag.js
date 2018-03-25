@@ -6,7 +6,7 @@ class createTag extends Component {
         return (
             <div className="TagCreate">
                     <div>
-                        <h1>Tag create</h1>
+                        <h1>Create new tag</h1>
                     </div>
             </div>
         );

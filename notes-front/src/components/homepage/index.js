@@ -6,7 +6,7 @@ class Homepage extends Component {
         return (
             <div className="homepage">
                 <div>
-                    <h1>Homepage</h1>
+                    <h1>{this.props.lang.homepage}</h1>
                 </div>
             </div>
         );

@@ -5,12 +5,12 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/js/bootstrap';
+import { Config }from './config/const';
 
 
 ReactDOM.render((
     <BrowserRouter>
-        <App />
+        <App name={Config.AppName} defaultLang={Config.defaultLanguage}/>
     </BrowserRouter>
 ), document.getElementById('root'));
 

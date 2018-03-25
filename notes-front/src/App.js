@@ -5,7 +5,8 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
-  render() {
+
+    render() {
     return (
       <div className="App">
       <Router>
@@ -19,11 +20,11 @@ class App extends Component {
                               <span className="icon-bar"></span>
                               <span className="icon-bar"></span>
                           </button>
-                          <Link to="/homepage" className="navbar-brand">MyApps</Link>
+                          <Link to="/" className="navbar-brand">{this.props.name} / {this.props.defaultLang}</Link>
                       </div>
                       <div className="collapse navbar-collapse" id="navigationbar">
                           <ul className="nav navbar-nav">
-                              <li className="active"><Link to="/new-note">Create note</Link></li>
+                              <li><Link to="/new-note">Create note</Link></li>
                               <li><Link to="/tags">Tags</Link></li>
                           </ul>
                       </div>

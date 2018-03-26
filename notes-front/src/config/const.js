@@ -1,5 +1,5 @@
 export const Config = {
     'AppName': 'Jenaye-notes',
-    'API': 'http://127.0.0.1:8000/',
+    'API': 'http://127.0.0.1:8000/api/',
     'defaultLanguage': 'fr'
 };

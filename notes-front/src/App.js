@@ -30,7 +30,7 @@ class App extends Component {
                       </div>
                   </div>
               </nav>
-              <Layout />
+              <Layout data={this.props}/>
           </div>
       </Router>
       </div>

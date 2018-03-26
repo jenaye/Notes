@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Translation } from '../../translate/translation';
+import { Config } from '../../config/const';
 
 class createTag extends Component {
 
@@ -6,7 +8,7 @@ class createTag extends Component {
         return (
             <div className="TagCreate">
                     <div>
-                        <h1>Create new tag</h1>
+                        <h1>{Translation.Config.defaultLanguage.tags.create}</h1>
                     </div>
             </div>
         );

@@ -1,4 +1,4 @@
-export const translation = {
+export const Translation = {
 
         "fr": {
             code: 'fr',
@@ -6,6 +6,11 @@ export const translation = {
 
             "notes": {
                 create:'Créer une note',
+                submit: 'valider',
+                save: 'sauvegarder',
+            },
+            "tags": {
+                create:'Créer un nouveau tag',
                 submit: 'valider',
                 save: 'sauvegarder',
             }
@@ -17,6 +22,11 @@ export const translation = {
 
             "notes": {
                 create:'Create new note',
+                submit: 'submit',
+                save: 'save',
+            },
+            "tags": {
+                create:'Create new tag',
                 submit: 'submit',
                 save: 'save',
             }

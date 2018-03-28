@@ -7,7 +7,7 @@
  * Time: 14:28
  */
 
-namespace App\Repository;
+namespace Jenaye\Repository;
 
 class TagRepository extends \Doctrine\ORM\EntityRepository
 {

@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Jenaye\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Jenaye\\Tests\\": "tests/"
         }
     },
     "replace": {

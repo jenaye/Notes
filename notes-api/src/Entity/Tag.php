@@ -6,7 +6,7 @@
  * Date: 24/03/18
  * Time: 14:21
  */
-namespace App\Entity;
+namespace Jenaye\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Note
  * @ApiResource(attributes={"normalization_context"={"groups"={"Tag"}}})
  * @ORM\Table(name="tag")
- * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
+ * @ORM\Entity(repositoryClass="Jenaye\Repository\TagRepository")
  */
 class Tag
 {
@@ -58,20 +58,20 @@ class Tag
     /**
      * Add note
      *
-     * @param \App\Entity\Note $note
+     * @param \Jenaye\Entity\Note $note
      *
      * @return Activity
      */
-    public function addTag(\App\Entity\Note $note)
+    public function addTag(\Jenaye\Entity\Note $note)
     {
         $this->notes[] = $note;
         return $this;
     }
     /**
      * Remove note
-     * @param \App\Entity\Note $note
+     * @param \Jenaye\Entity\Note $note
      */
-    public function removeTag(\App\Entity\Note $note)
+    public function removeTag(\Jenaye\Entity\Note $note)
     {
         $this->notes->removeElement($note);
     }

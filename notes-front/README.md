@@ -2,9 +2,7 @@
 
 # Dependencies
  
- - bootstrap
  - react-router-dom
- - jquery
  
  # Todo 
  

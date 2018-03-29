@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import TagResource from '../../providers/TagResource';
+import Chip from 'material-ui/Chip';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class createNote extends Component {
 
@@ -23,6 +27,7 @@ class createNote extends Component {
     }
 
     handleSubmit(event) {
+        console.log(this.state);
         event.preventDefault();
     }
 
@@ -35,26 +40,28 @@ class createNote extends Component {
             <div className="form-group">
                 <h1>{this.props.lang.notes.create}</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <p className="text-muted"></p>
-                    <textarea
+                    <TextField
+                        hintText="this is a placeholder"
+                        multiLine={true}
+                        rows={2}
+                        rowsMax={4}
                         name="content"
                         value={this.state.content}
-                        onChange={(event) => this.setState({content: event.target.value})}
-                        className="form-control" rows="3">
-                    </textarea>
+                        onChange={(event) => this.setState({content: event.target.value})}>
+                    </TextField>
                     <br/>
                     <h1>Url</h1>
-                    <input type="text" name="url"
-                           className="form-control"
-                           value={this.state.url}
-                           onChange={(event) => this.setState({url: event.target.value})}
+                    <TextField type="text" name="url"
+                               className="form-control"
+                               hintText="Hint Text"
+                               value={this.state.url}
+                               onChange={(event) => this.setState({url: event.target.value})}
                     />
-                    <input type="submit" className="btn btn-primary" value={this.props.lang.submit} />
+                    <RaisedButton label="Default"  onClick={this.handleSubmit}  value={this.props.lang.submit} />
                 </form>
                 {
                     this.state.tags.map((elem) =>
-                        <span className="badge badge-dark" key={elem.id}> {elem.name}
-                        </span>
+                        <Chip key={elem.id}>{elem.name}</Chip>
                     )
                 }
             </div>

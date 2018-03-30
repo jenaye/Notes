@@ -11,7 +11,7 @@ const routes = (
     <div>
         <Route exact path="/" render={()=><Homepage lang={Translation.fr} />}/>
         <Route exact path="/new-note" render={()=><CreateNote lang={Translation.fr}/>}/>
-        <Route exact path="/tags" render={()=><CreateTag lang={Translation.fr} />}/>
+        <Route exact path="/new-tag" render={()=><CreateTag lang={Translation.fr} />}/>
     </div>
 );
 

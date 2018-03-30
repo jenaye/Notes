@@ -25,7 +25,6 @@ class App extends Component {
         }
 
     return (
-      <div className="App">
       <Router>
           <div>
               <AppBar title="AppTitle" onLeftIconButtonClick={this.handleToggle} />
@@ -36,6 +35,9 @@ class App extends Component {
                   <Link to="/new-note" style={{ textDecoration: 'none' }}>
                       <MenuItem onClick={this.handleToggle}>Create note</MenuItem>
                   </Link>
+                  <Link to="/new-tag" style={{ textDecoration: 'none' }}>
+                      <MenuItem onClick={this.handleToggle}>Create tag</MenuItem>
+                  </Link>
                   <Link to="/tags" style={{ textDecoration: 'none' }}>
                       <MenuItem onClick={this.handleToggle} >Tags</MenuItem>
                   </Link>
@@ -43,7 +45,6 @@ class App extends Component {
               <Layout data={this.props}/>
           </div>
       </Router>
-      </div>
     );
   }
 }

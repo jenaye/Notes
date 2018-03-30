@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import TagResource from '../../providers/TagResource';
+import TagResource from '../../providers/NoteResource';
+import NoteResource from '../../providers/NoteResource';
 import Chip from 'material-ui/Chip';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -27,7 +28,13 @@ class createNote extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.state);
+        const data = {
+            created_at: new Date(),
+            content : this.state.content
+        }
+        NoteResource.post(data).then((response) => {
+
+        });
         event.preventDefault();
     }
 

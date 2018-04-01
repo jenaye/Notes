@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import NoteResource from '../../providers/NoteResource';
+import {List, ListItem} from 'material-ui/List';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import Divider from 'material-ui/Divider';
+import ActionInfo from 'material-ui/svg-icons/action/info';
+import { Link } from 'react-router-dom';
 
 
 class Homepage extends Component {
@@ -30,13 +38,18 @@ class Homepage extends Component {
     render() {
         return (
             <div className="homepage">
-                    <h1>{this.props.lang.homepage}</h1>s
+                    <h1>{this.props.lang.homepage}</h1>
                 <span>listes des 5 dernières notes</span>
+                <List>
                 {
                     this.state.tags.map((elem) =>
-                        <span key={elem.id}>{elem.id}-{elem.content}</span>
+                         <Link to={`/show-note/${elem.id}`} key={elem.id} >
+                            <ListItem  primaryText={elem.content} id={elem.id} leftIcon={<ContentSend />} />
+                        </Link>
                     )
                 }
+                </List>
+    <Divider />
             </div>
         );
     }

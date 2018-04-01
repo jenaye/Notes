@@ -7,6 +7,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
 
+
 class App extends Component {
 
     constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
     handleToggle = (event) => this.setState({open: !this.state.open});
 
     render() {
+      
         const {styleFromProps} = this.props;
         const contentStyle = {  ...styleFromProps, transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
 
@@ -27,7 +29,8 @@ class App extends Component {
     return (
       <Router>
           <div>
-              <AppBar title="AppTitle" onLeftIconButtonClick={this.handleToggle} />
+              <AppBar title="AppTitle" onLeftIconButtonClick={this.handleToggle} style={{ backgroundColor: '#66BB6A'}}
+  />
               <Drawer containerStyle={{height: 'calc(100% - 64px)', top: 64}} docked={true} width={200} open={this.state.open} zDepth={2}>
                   <Link to="/" style={{ textDecoration: 'none' }}>
                       <MenuItem onClick={this.handleToggle}>Accueil</MenuItem>

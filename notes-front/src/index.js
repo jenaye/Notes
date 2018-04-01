@@ -9,8 +9,8 @@ import { Config }from './config/const';
 
 ReactDOM.render((
     <BrowserRouter>
-        <MuiThemeProvider>
-        <App name={Config.AppName} defaultLang={Config.defaultLanguage}/>
+        <MuiThemeProvider >
+        <App name={Config.AppName} defaultLang={Config.defaultLanguage} />
         </MuiThemeProvider>
     </BrowserRouter>
 ), document.getElementById('root'));

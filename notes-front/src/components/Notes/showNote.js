@@ -7,9 +7,11 @@ import {List, ListItem} from 'material-ui/List';
 class showNote extends Component {
 
     constructor(props) {
+        var str=window.location.href
+        var last = str.substring(str.lastIndexOf("/") + 1, str.length);
         super(props);
         console.log(props)
-        this.state = {id: 1,  data: [] };
+        this.state = {id: last,  data: [] };
 
     }
 
@@ -28,7 +30,7 @@ class showNote extends Component {
             <span>je suis dans show note</span>
             <List>
              {
-                console.log(this.state)
+                this.state.data.content
                 }
                 </List>
             </div>

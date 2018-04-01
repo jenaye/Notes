@@ -10,7 +10,12 @@ class Homepage extends Component {
     }
 
     componentDidMount(){
-        NoteResource.findAll().then((response) => {
+
+        var d = new Date();
+        var n = d.toISOString();
+        var s = n.substring(0, n.indexOf('T'));
+
+        NoteResource.findBy('created_at[before]='+ s + '&limit=5').then((response) => {
             let tags = [];
             response.map(function(item) {
                 tags.push(item);

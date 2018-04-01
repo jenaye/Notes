@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Note
- * @ApiResource(attributes={"normalization_context"={"groups"={"Note"}}})
+ * @ApiResource(attributes={"normalization_context"={"groups"={"Note"}},"filters"={"date_filter"}})
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="Jenaye\Repository\NoteRepository")
  */

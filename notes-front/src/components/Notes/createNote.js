@@ -1,39 +1,44 @@
 import React, { Component } from 'react';
-import TagResource from '../../providers/NoteResource';
+import TagResource from '../../providers/TagResource';
 import NoteResource from '../../providers/NoteResource';
 import Chip from 'material-ui/Chip';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import AutoComplete from 'material-ui/AutoComplete';
 
 
 class createNote extends Component {
 
+
     constructor(props) {
         super(props);
-        this.state = {content: '', url:'', tags: []};
+        this.state = {content: '', url:'', tags: [], TagName: [],selectedTag: []};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
         TagResource.findAll().then((response) => {
-            let tags = [];
+            let datas = [];
             response.map(function(item) {
-                tags.push(item);
+                datas.push(item.name);
             });
             this.setState({
-                tags: response
+                tags: response,
+                TagName: datas
+
             });
         });
+
     }
 
     handleSubmit(event) {
         const data = {
             created_at: new Date(),
-            content : this.state.content
+            content : this.state.content,
+            tags : this.state.selectedTag
         }
         NoteResource.post(data).then((response) => {
-
         });
         event.preventDefault();
     }
@@ -42,10 +47,20 @@ class createNote extends Component {
         this.setState({value: event.target.value});
     }
 
+    
+
     render() {
         return (
             <div className="form-group">
                 <h1>{this.props.lang.notes.create}</h1>
+                <AutoComplete
+      floatingLabelText="Find tags with AutoComplete"
+      filter={AutoComplete.fuzzyFilter}
+      dataSource={this.state.TagName}
+      value={this.state.selectedTag}
+      onChange={(event) => this.setState({selectedTag: event.target.value})}
+      maxSearchResults={5}
+    />
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         hintText="this is a placeholder"
@@ -66,11 +81,8 @@ class createNote extends Component {
                     />
                     <RaisedButton label="Default"  onClick={this.handleSubmit}  value={this.props.lang.submit} />
                 </form>
-                {
-                    this.state.tags.map((elem) =>
-                        <Chip key={elem.id}>{elem.name}</Chip>
-                    )
-                }
+               
+
             </div>
 
 

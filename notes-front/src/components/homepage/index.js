@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import NoteResource from '../../providers/NoteResource';
 import {List, ListItem} from 'material-ui/List';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import Divider from 'material-ui/Divider';
-import ActionInfo from 'material-ui/svg-icons/action/info';
 import { Link } from 'react-router-dom';
+const ReactMarkdown = require('react-markdown');
 
 
 class Homepage extends Component {
@@ -23,7 +20,7 @@ class Homepage extends Component {
         var n = d.toISOString();
         var s = n.substring(0, n.indexOf('T'));
 
-        NoteResource.findBy('created_at[before]='+ s + '&limit=5').then((response) => {
+        NoteResource.findBy('created_at[after]='+ s + '&limit=5').then((response) => {
             let tags = [];
             response.map(function(item) {
                 tags.push(item);

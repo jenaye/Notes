@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import NoteResource from '../../providers/NoteResource';
 import {List, ListItem} from 'material-ui/List';
-
+const ReactMarkdown = require('react-markdown');
 
 
 class showNote extends Component {
 
     constructor(props) {
-        var str=window.location.href
-        var last = str.substring(str.lastIndexOf("/") + 1, str.length);
         super(props);
-        console.log(props)
-        this.state = {id: last,  data: [] };
+        this.state = { data: [] };
 
     }
 
 
     componentDidMount(){
-        NoteResource.find(this.state.id).then((response) => {
+        NoteResource.find(this.props.id).then((response) => {
                this.setState({
                 data: response
             });
@@ -28,11 +25,7 @@ class showNote extends Component {
         return (
             <div>
             <span>je suis dans show note</span>
-            <List>
-             {
-                this.state.data.content
-                }
-                </List>
+            <ReactMarkdown source={this.state.data.content} />
             </div>
 
 

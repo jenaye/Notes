@@ -3,6 +3,8 @@
 # Dependencies
  
  - react-router-dom
+ - Markdown = https://github.com/rexxars/react-markdown
+ 
  
  # Todo 
  

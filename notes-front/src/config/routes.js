@@ -13,7 +13,7 @@ const routes = (
         <Route exact path="/" render={()=><Homepage lang={Translation.fr} />}/>
         <Route exact path="/new-note" render={()=><CreateNote lang={Translation.fr}/>}/>
         <Route exact path="/new-tag" render={()=><CreateTag lang={Translation.fr} />}/>
-        <Route exact path="/show-note/:id" render={()=><ShowNote lang={Translation.fr} />}/>
+        <Route exact path="/show-note/:id" render={(props) => <ShowNote id={props.match.params.id} lang={Translation.fr}/>} />
     </div>
 );
 

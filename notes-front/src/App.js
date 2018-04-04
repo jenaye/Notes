@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <Router>
           <div>
-              <AppBar title="AppTitle" onLeftIconButtonClick={this.handleToggle} style={{ backgroundColor: '#66BB6A'}}
+              <AppBar title={this.props.name} onLeftIconButtonClick={this.handleToggle} style={{ backgroundColor: '#66BB6A'}}
   />
               <Drawer containerStyle={{height: 'calc(100% - 64px)', top: 64}} docked={true} width={200} open={this.state.open} zDepth={2}>
                   <Link to="/" style={{ textDecoration: 'none' }}>

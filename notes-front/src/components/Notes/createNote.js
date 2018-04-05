@@ -36,7 +36,7 @@ class createNote extends Component {
         const data = {
             created_at: new Date(),
             content : this.state.content,
-            tags : this.state.selectedTag
+            tags : this.state.values
         }
 
         NoteResource.post(data).then((response) => {

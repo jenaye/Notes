@@ -7,18 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const toto = [
-  'Crypto',
-  'Linux',
-  'Web',
-];
-
-
 class createNote extends Component {
-    state = {
-    values: [],
-  };
-
 
 
     constructor(props) {

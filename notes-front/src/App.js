@@ -18,7 +18,7 @@ class App extends Component {
     handleToggle = (event) => this.setState({open: !this.state.open});
 
     render() {
-      
+
         const {styleFromProps} = this.props;
         const contentStyle = {  ...styleFromProps, transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
 

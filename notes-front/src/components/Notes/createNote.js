@@ -4,15 +4,26 @@ import NoteResource from '../../providers/NoteResource';
 import Chip from 'material-ui/Chip';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import AutoComplete from 'material-ui/AutoComplete';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
+const toto = [
+  'Crypto',
+  'Linux',
+  'Web',
+];
 
 
 class createNote extends Component {
+    state = {
+    values: [],
+  };
+
 
 
     constructor(props) {
         super(props);
-        this.state = {content: '', url:'', tags: [], TagName: [],selectedTag: []};
+        this.state = {content: '', url:'', tags: [], values: [], tagName:[]};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -25,7 +36,7 @@ class createNote extends Component {
             });
             this.setState({
                 tags: response,
-                TagName: datas
+                tagName: datas
 
             });
         });
@@ -38,6 +49,7 @@ class createNote extends Component {
             content : this.state.content,
             tags : this.state.selectedTag
         }
+
         NoteResource.post(data).then((response) => {
         });
         event.preventDefault();
@@ -47,20 +59,53 @@ class createNote extends Component {
         this.setState({value: event.target.value});
     }
 
-    
+    handleChanged = (event, index, values) => this.setState({values});
+
+    selectionRenderer = (values) => {
+    switch (values.length) {
+      case 0:
+        return '';
+      case 1:
+        return this.state.tags[values[0]];
+      default:
+        return `${values}`;
+    }
+  }
+
+
+
+     menuItems(persons) {
+    return this.state.tags.map((elem) => (
+      <MenuItem
+        key={elem.id}
+        insetChildren={true}
+        checked={this.state.values.indexOf(elem.value) > -1}
+        value={elem.name}
+        primaryText={elem.name}
+      />
+    ));
+  }
+
+  
 
     render() {
+        console.log(this.state.tags)
+        const {values} = this.state;
         return (
             <div className="form-group">
                 <h1>{this.props.lang.notes.create}</h1>
-                <AutoComplete
-      floatingLabelText="Find tags with AutoComplete"
-      filter={AutoComplete.fuzzyFilter}
-      dataSource={this.state.TagName}
-      value={this.state.selectedTag}
-      onChange={(event) => this.setState({selectedTag: event.target.value})}
-      maxSearchResults={5}
-    />
+
+                <SelectField
+                    multiple={true}
+                    hintText="Select a name"
+                    value={this.state.values}
+                    onChange={this.handleChanged}
+                    selectionRenderer={this.selectionRenderer}
+                  >
+                    {this.menuItems(this.state.tags)}
+      </SelectField>
+
+
                 <form onSubmit={this.handleSubmit}>
                     <TextField
                         hintText="this is a placeholder"

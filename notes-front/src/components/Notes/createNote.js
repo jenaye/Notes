@@ -12,7 +12,7 @@ class createNote extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {content: '', url:'', tags: [], values: [], tagName:[]};
+        this.state = {content: '', url:'', tags: [], values: [], tagName:[], SelectedTags:[]};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,14 +33,27 @@ class createNote extends Component {
     }
 
     handleSubmit(event) {
+        var that = this;
+        var myArray = [];
+        let result = this.state.values.map(t => {
+        const r = that.state.tags.find(e => e.name === t);
+        myArray.push(r);
+        });
+
+        that.setState({
+            SelectedTags: myArray
+        }); 
+
         const data = {
             created_at: new Date(),
-            content : this.state.content,
-            tags : this.state.values
+            content : that.state.content,
+            tags : this.state.SelectedTags
         }
 
-        NoteResource.post(data).then((response) => {
+       NoteResource.post(data).then((response) => {
+        console.log(response)
         });
+        
         event.preventDefault();
     }
 
@@ -78,7 +91,7 @@ class createNote extends Component {
   
 
     render() {
-        console.log(this.state.tags)
+        
         const {values} = this.state;
         return (
             <div className="form-group">

@@ -48,6 +48,7 @@ class createNote extends Component {
         const data = {
             created_at: new Date(),
             content : that.state.content,
+            url : that.state.url,
             tags : myArray
         }
 

@@ -24,3 +24,8 @@ services:
                 parent: 'api_platform.doctrine.orm.date_filter'
                 arguments: [ { created_at: ~ } ]
                 tags:      [ { name: 'api_platform.filter', id: 'date_filter' } ]
+
+    note.search_filter:
+        parent:    'api_platform.doctrine.orm.search_filter'
+        arguments: [ { content: 'partial' } ]
+        tags:      [ { name: 'api_platform.filter', id: 'note.search' } ]

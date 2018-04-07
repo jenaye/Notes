@@ -11,7 +11,7 @@ class Homepage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {tags: []};
+        this.state = {notes: []};
     }
 
     componentDidMount(){
@@ -21,12 +21,12 @@ class Homepage extends Component {
         var s = n.substring(0, n.indexOf('T'));
 
         NoteResource.findBy('created_at[after]='+ s + '&limit=5').then((response) => {
-            let tags = [];
+            let notes = [];
             response.map(function(item) {
-                tags.push(item);
+                notes.push(item);
             });
             this.setState({
-                tags: response
+                notes: response
             });
         });
     }
@@ -39,7 +39,7 @@ class Homepage extends Component {
                 <span>listes des 5 dernières notes</span>
                 <List>
                 {
-                    this.state.tags.map((elem) =>
+                    this.state.notes.map((elem) =>
                          <Link to={`/show-note/${elem.id}`} key={elem.id} >
                             <ListItem  primaryText={elem.content} id={elem.id} leftIcon={<ContentSend />} />
                         </Link>

@@ -35,6 +35,9 @@ class App extends Component {
                   <Link to="/" style={{ textDecoration: 'none' }}>
                       <MenuItem onClick={this.handleToggle}>Accueil</MenuItem>
                   </Link>
+                  <Link to="/search" style={{ textDecoration: 'none' }}>
+                      <MenuItem onClick={this.handleToggle}>Search note</MenuItem>
+                  </Link>
                   <Link to="/new-note" style={{ textDecoration: 'none' }}>
                       <MenuItem onClick={this.handleToggle}>Create note</MenuItem>
                   </Link>

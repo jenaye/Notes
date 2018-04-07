@@ -12,10 +12,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Membre
- * @ApiResource()
+ * @ApiResource(attributes={"normalization_context"={"groups"={"Tag"}}})
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
@@ -24,6 +25,7 @@ class Tag
 
     /**
      * @var int
+     * @Groups({"Note"})
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -112,7 +114,9 @@ class Tag
     {
         $this->name = $name;
     }
+
     /**
+     * @Groups({"Note", "Tag"})
      * @ORM\Column(type="string", length=30)
      */
     public $name;

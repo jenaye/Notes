@@ -12,10 +12,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * Membre
- * @ApiResource()
+ * @ApiResource(attributes={"normalization_context"={"groups"={"Note"}},"filters"={"note.search"}})
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="App\Repository\NoteRepository")
  */
@@ -24,6 +26,7 @@ class Note
 
     /**
      * @var int
+     * @Groups({"Note"})
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -31,17 +34,26 @@ class Note
     private $id;
 
     /**
+     * @Groups({"Note"})
      * @ORM\Column(type="datetime")
      */
     public $created_at;
 
     /**
+     * @Groups({"Note"})
      * @ORM\Column(type="text")
      */
     public $content;
 
+    /**
+     * @Groups({"Note"})
+     * @ORM\Column(type="string")
+     */
+    public $url;
+
 
     /**
+     * @Groups({"Note", "Tag"})
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="notes")
      */
     private $tags;

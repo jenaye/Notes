@@ -7,7 +7,7 @@
  * Time: 14:28
  */
 
-namespace Jenaye\Repository;
+namespace App\Repository;
 
 class NoteRepository extends \Doctrine\ORM\EntityRepository
 {

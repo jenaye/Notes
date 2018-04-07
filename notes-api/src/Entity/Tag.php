@@ -3,85 +3,82 @@
  * Created by PhpStorm.
  * User: Houziaux mike : jenaye
  * Email : mike@les-tilleuls.coop
- * Date: 24/03/18
- * Time: 14:21
+ * Date: 07/04/18
+ * Time: 16:13
  */
-namespace Jenaye\Entity;
 
+
+namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Note
- * @ApiResource(attributes={"normalization_context"={"groups"={"Tag"}}})
+ * Membre
+ * @ApiResource()
  * @ORM\Table(name="tag")
- * @ORM\Entity(repositoryClass="Jenaye\Repository\TagRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag
 {
+
     /**
+     * @var int
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"Tag"})
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"Tag"})
      */
     public $created_at;
 
-    /**
-     * @ORM\Column(type="string", length=30)
-     * @Groups({"Tag"})
-     */
-    public $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="Note", mappedBy="tags")
-     * @Groups({"Tag"})
      */
     private $notes;
 
-
     /**
-     * Constructor
+     * Tag constructor.
      */
     public function __construct()
     {
-        $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    /**
-     * Add note
-     *
-     * @param \Jenaye\Entity\Note $note
-     *
-     * @return Activity
-     */
-    public function addTag(\Jenaye\Entity\Note $note)
-    {
-        $this->notes[] = $note;
-        return $this;
-    }
-    /**
-     * Remove note
-     * @param \Jenaye\Entity\Note $note
-     */
-    public function removeTag(\Jenaye\Entity\Note $note)
-    {
-        $this->notes->removeElement($note);
+        $this->notes = new ArrayCollection();
     }
 
     /**
      * @return mixed
      */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param mixed $notes
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -99,6 +96,26 @@ class Tag
     {
         $this->created_at = $created_at;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    public $name;
 
 
 }

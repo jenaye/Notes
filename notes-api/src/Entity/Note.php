@@ -3,82 +3,123 @@
  * Created by PhpStorm.
  * User: Houziaux mike : jenaye
  * Email : mike@les-tilleuls.coop
- * Date: 24/03/18
- * Time: 14:21
+ * Date: 07/04/18
+ * Time: 16:13
  */
-namespace Jenaye\Entity;
 
+
+namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Note
- * @ApiResource(attributes={"normalization_context"={"groups"={"Note"}},"filters"={"date_filter"}})
+ * Membre
+ * @ApiResource()
  * @ORM\Table(name="note")
- * @ORM\Entity(repositoryClass="Jenaye\Repository\NoteRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\NoteRepository")
  */
 class Note
 {
+
     /**
+     * @var int
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     * @Groups({"Note"})
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"Note"})
      */
     public $created_at;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"Note"})
      */
     public $content;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="notes")
-     * @Groups({"Note"})
      */
     private $tags;
 
+    /**
+     * Note constructor.
+     */
     public function __construct()
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \Jenaye\Entity\Tag $tag
-     *
-     * @return Note
-     */
-    public function addTag(\Jenaye\Entity\Tag $tag)
-    {
-        $this->tags[] = $tag;
-        return $this;
-    }
-
-    /**
-     * Remove Tag
-     * @param \Jenaye\Entity\Tag $tags
-     */
-    public function removeTag(\Jenaye\Entity\Tag $tag)
-    {
-        $this->tags->removeElement($tag);
+        $this->tags = new ArrayCollection();
     }
 
     /**
      * @return mixed
      */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+
+
+
 }

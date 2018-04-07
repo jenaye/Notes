@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TagResource from '../../providers/TagResource';
 import NoteResource from '../../providers/NoteResource';
-import Chip from 'material-ui/Chip';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
@@ -10,24 +9,30 @@ import MenuItem from 'material-ui/MenuItem';
 class createNote extends Component {
 
 
+
     constructor(props) {
         super(props);
-        this.state = {content: '', url:'', tags: [], values: [], tagName:[], SelectedTags:[]};
+
+        this.state = {content: '', url:'', tags: [], values: [], tagName:[]};
+
         this.handleChange = this.handleChange.bind(this);
+        this.handleChanged = this.handleChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
+
         TagResource.findAll().then((response) => {
             let datas = [];
-            response.map(function(item) {
+             response.map(function(item) {
                 datas.push(item.name);
             });
+
             this.setState({
                 tags: response,
                 tagName: datas
-
             });
+
         });
 
     }
@@ -35,24 +40,20 @@ class createNote extends Component {
     handleSubmit(event) {
         var that = this;
         var myArray = [];
-        let result = this.state.values.map(t => {
+        this.state.values.map(t => {
         const r = that.state.tags.find(e => e.name === t);
-        myArray.push(r);
+        myArray.push(r['@id']);
         });
-
-        that.setState({
-            SelectedTags: myArray
-        }); 
 
         const data = {
             created_at: new Date(),
             content : that.state.content,
-            tags : this.state.SelectedTags
+            tags : myArray
         }
 
        NoteResource.post(data).then((response) => {
-        console.log(response)
         });
+        
         
         event.preventDefault();
     }
@@ -64,14 +65,14 @@ class createNote extends Component {
     handleChanged = (event, index, values) => this.setState({values});
 
     selectionRenderer = (values) => {
-    switch (values.length) {
-      case 0:
-        return '';
-      case 1:
-        return this.state.tags[values[0]];
-      default:
-        return `${values}`;
+        if (values.length === 1) {
+            return values;
+        } else if (values.length === 2) {
+            return values+ ',';
+        } else {
+            return values+ ',';
     }
+    
   }
 
 
@@ -84,6 +85,7 @@ class createNote extends Component {
         checked={this.state.values.indexOf(elem.value) > -1}
         value={elem.name}
         primaryText={elem.name}
+        
       />
     ));
   }
@@ -99,10 +101,11 @@ class createNote extends Component {
 
                 <SelectField
                     multiple={true}
-                    hintText="Select a name"
+                    hintText="Select a tags"
                     value={this.state.values}
                     onChange={this.handleChanged}
                     selectionRenderer={this.selectionRenderer}
+                    fullWidth={true}
                   >
                     {this.menuItems(this.state.tags)}
       </SelectField>
@@ -110,10 +113,11 @@ class createNote extends Component {
 
                 <form onSubmit={this.handleSubmit}>
                     <TextField
+                        fullWidth={true}
                         hintText="this is a placeholder"
                         multiLine={true}
-                        rows={2}
-                        rowsMax={4}
+                        rows={5}
+                        rowsMax={10}
                         name="content"
                         value={this.state.content}
                         onChange={(event) => this.setState({content: event.target.value})}>
@@ -122,6 +126,7 @@ class createNote extends Component {
                     <h1>Url</h1>
                     <TextField type="text" name="url"
                                className="form-control"
+                               fullWidth={true}
                                hintText="Hint Text"
                                value={this.state.url}
                                onChange={(event) => this.setState({url: event.target.value})}

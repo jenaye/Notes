@@ -4,7 +4,7 @@ import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import Divider from 'material-ui/Divider';
 import { Link } from 'react-router-dom';
-const ReactMarkdown = require('react-markdown');
+// const ReactMarkdown = require('react-markdown');
 
 
 class Homepage extends Component {

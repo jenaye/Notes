@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NoteResource from '../../providers/NoteResource';
-import {List, ListItem} from 'material-ui/List';
 const ReactMarkdown = require('react-markdown');
 
 

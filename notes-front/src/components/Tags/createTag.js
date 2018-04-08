@@ -40,6 +40,7 @@ class createTag extends Component {
                                className="form-control"
                                hintText="Hint Text"
                                onChange={(event) => this.setState({url: event.target.value})}
+                               fullWidth={true}
                     />
                     <RaisedButton label="Default"  onClick={this.handleSubmit}  value={this.props.lang.submit} />
                 </form>

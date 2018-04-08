@@ -13,7 +13,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { notes: [], value: ''};
+        this.state = { notes: [], value: '', error: ''};
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
@@ -22,13 +22,20 @@ class Search extends Component {
      handleSubmit(event) {
           event.preventDefault();
           NoteResource.findBy('content='+ this.state.value).then((response) => {
-          console.log(response)
+          if (response === undefined || response.length == 0) {
+              console.log("array vide")
+              this.setState({
+                error: 'Aucun résultat pour votre recherche'
+            });
+              
+          }
           let notes = [];
           response.map(function(item) {
               notes.push(item);
           });
+
           this.setState({
-              notes: response
+              notes: response,
             });
         });
 
@@ -49,6 +56,7 @@ class Search extends Component {
                                hintText="recherche un contenu"
                                value={this.state.value}
                                onChange={e => this.setState({ value: e.target.value })}
+                               fullWidth={true}
                     />
                     <RaisedButton label="Default" type="submit"/>
                     <List>
@@ -59,6 +67,7 @@ class Search extends Component {
                         </Link>
                     )
                 }
+                {this.state.error}
                 </List>
                   </form>
             </div>

@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Config }from './config/const';
+import AppStyle from './App.css';
 
 
 ReactDOM.render((
     <BrowserRouter>
-        <App name={Config.AppName} defaultLang={Config.defaultLanguage}/>
+        <MuiThemeProvider >
+        <App name={Config.AppName} style={AppStyle} defaultLang={Config.defaultLanguage} />
+        </MuiThemeProvider>
     </BrowserRouter>
 ), document.getElementById('root'));
 

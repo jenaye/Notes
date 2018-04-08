@@ -2,7 +2,8 @@ export const Translation = {
 
         "fr": {
             code: 'fr',
-            homepage :'Accueil',
+            homepage: 'Accueil',
+            openLink: 'Voir le site',
 
             "notes": {
                 create:'Créer une note',
@@ -19,6 +20,7 @@ export const Translation = {
         "en": {
             code: 'en',
             homepage: 'Homepage',
+            openLink: 'Show Website',
 
             "notes": {
                 create:'Create new note',

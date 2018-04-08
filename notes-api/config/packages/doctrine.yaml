@@ -22,9 +22,9 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            Jenaye:
+            App:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Jenaye\Entity'
-                alias: Jenaye
+                prefix: 'App\Entity'
+                alias: App

@@ -2,9 +2,9 @@
 
 # Dependencies
  
- - bootstrap
  - react-router-dom
- - jquery
+ - Markdown = https://github.com/rexxars/react-markdown
+ 
  
  # Todo 
  

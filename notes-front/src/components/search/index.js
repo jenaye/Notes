@@ -3,7 +3,6 @@ import NoteResource from '../../providers/NoteResource';
 import {List, ListItem} from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import ContentSend from 'material-ui/svg-icons/content/send';
-import Divider from 'material-ui/Divider';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 // const ReactMarkdown = require('react-markdown');
@@ -13,41 +12,54 @@ class Search extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {notes: [], search: ''};
+
+        this.state = { notes: [], value: '', error: ''};
+        this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
-    componentDidMount(){
 
-    }
+     handleSubmit(event) {
+          event.preventDefault();
+          NoteResource.findBy('content='+ this.state.value).then((response) => {
+          if (response === undefined || response.length == 0) {
+              console.log("array vide")
+              this.setState({
+                error: 'Aucun résultat pour votre recherche'
+            });
+              
+          }
+          let notes = [];
+          response.map(function(item) {
+              notes.push(item);
+          });
 
-    hundleSubmit(event){
-        console.log('je passe ici ')
-        var that = this;
-        NoteResource.findBy('content='+ that.state.search).then((response) => {
-            console.log(response)
+          this.setState({
+              notes: response,
+            });
         });
 
-        event.preventDefault();
-    }
+      }
 
     handleChange(event) {
-        this.setState({search: event.target.value});
-    }
+    this.setState({value: event.target.value});
+  }
 
 
     render() { 
         return (
             <div className="homepage">
                     <h1>Faites votre recherche</h1>
-
+                  <form onSubmit={this.handleSubmit}>
                     <TextField type="text" name="search"
                                className="form-control"
-                               hintText="Hint Text"
-                               value={this.state.search}
-                               onChange={(event) => this.setState({search: event.target.value})}
+                               hintText="recherche un contenu"
+                               value={this.state.value}
+                               onChange={e => this.setState({ value: e.target.value })}
+                               fullWidth={true}
                     />
-                <List>
+                    <RaisedButton label="Default" type="submit"/>
+                    <List>
                 {
                     this.state.notes.map((elem) =>
                          <Link to={`/show-note/${elem.id}`} key={elem.id} >
@@ -55,10 +67,9 @@ class Search extends Component {
                         </Link>
                     )
                 }
+                {this.state.error}
                 </List>
-                 <RaisedButton label="Rechercher"  onClick={this.handleSubmit}  />
-    <Divider />
-
+                  </form>
             </div>
         );
     }

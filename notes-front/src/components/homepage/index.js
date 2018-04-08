@@ -4,8 +4,15 @@ import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import Divider from 'material-ui/Divider';
 import { Link } from 'react-router-dom';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 // const ReactMarkdown = require('react-markdown');
-
 
 class Homepage extends Component {
 
@@ -34,19 +41,32 @@ class Homepage extends Component {
 
     render() {
         return (
-            <div className="homepage">
+            <div>
                     <h1>{this.props.lang.homepage}</h1>
                 <span>listes des 5 dernières notes</span>
-                <List>
+                <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHeaderColumn>ID</TableHeaderColumn>
+                        <TableHeaderColumn>Content</TableHeaderColumn>
+                        <TableHeaderColumn>Url</TableHeaderColumn>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                    
                 {
                     this.state.notes.map((elem) =>
-                         <Link to={`/show-note/${elem.id}`} key={elem.id} >
-                            <ListItem  primaryText={elem.content} id={elem.id} leftIcon={<ContentSend />} />
-                        </Link>
+                        <TableRow key={elem.id} selectable={false}>
+                        <Link to={`/show-note/${elem.id}`} key={elem.id} >
+                            <TableRowColumn key={elem.id}>{elem.id}</TableRowColumn>
+                            </Link>
+                            <TableRowColumn>{elem.content}</TableRowColumn>
+                            <TableRowColumn>{elem.url}</TableRowColumn>
+                        </TableRow>
                     )
                 }
-                </List>
-    <Divider />
+                </TableBody>
+                  </Table>
             </div>
         );
     }

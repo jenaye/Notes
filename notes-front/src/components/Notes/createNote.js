@@ -95,7 +95,6 @@ class createNote extends Component {
 
     render() {
         
-        const {values} = this.state;
         return (
             <div className="form-group">
                 <h1>{this.props.lang.notes.create}</h1>

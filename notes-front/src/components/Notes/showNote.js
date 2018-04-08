@@ -5,10 +5,6 @@ import Chip from 'material-ui/Chip';
 const ReactMarkdown = require('react-markdown');
 
 
-const style = {
-  color: '#FFF',
-};
-
 class showNote extends Component {
 
 
@@ -33,9 +29,9 @@ class showNote extends Component {
     render() {
         return (
             <div>
-            <span>je suis dans show note</span>
+            <span>Note id : {this.state.data.id}</span>
             <ReactMarkdown source={this.state.data.content} />
-            {this.state.data.url == '' ?
+            {this.state.data.url === '' ?
                 'Aucun lien pour cette note'
              : <RaisedButton href={this.state.data.url} label={this.props.lang.openLink}
                 backgroundColor="#66BB6A" 

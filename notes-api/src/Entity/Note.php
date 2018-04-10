@@ -131,7 +131,4 @@ class Note
         $this->created_at = $created_at;
     }
 
-
-
-
 }
